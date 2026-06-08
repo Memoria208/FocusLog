@@ -1,0 +1,67 @@
+
+<div style="font-family: var(--font-mono); font-size: 13px; line-height: 1.7; color: var(--color-text-primary); padding: 1.5rem; background: var(--color-background-secondary); border-radius: var(--border-radius-lg); border: 0.5px solid var(--color-border-tertiary);">
+<pre style="margin: 0; white-space: pre-wrap; word-break: break-word;">
+Learning Tracker - Overview
+
+What it does
+A lightweight desktop tool for logging study and project
+sessions to a local SQLite database. One double-click to
+start a session, another to stop. Automatically calculates
+duration and logs date, time, topic, and notes. Built to
+track progress across all my learning tracks over time.
+Includes a built-in dashboard with live charts.
+
+Status
+Complete — actively in use.
+
+GitHub
+https://github.com/Memoria208/learning-tracker
+
+Tech Stack
+   * Python 3.14.2
+   * SQLite (built into Python — no install needed)
+   * matplotlib 3.x
+   * tkinter (built-in Python GUI)
+
+App Structure
+   * tracker.py — main script, handles all logic
+   * sessions.db — local SQLite database (not tracked in Git)
+   * config.json — stores user's custom category list
+   * session_state.json — temp file for active sessions
+   * .gitignore — protects database and temp files
+
+App Flow
+   * Double-click shortcut — opens main menu
+   * Main menu options:
+     - Start Session — pick a category, timer starts
+     - View Dashboard — opens live charts
+     - Settings — manage categories
+   * Double-click again while session is active — prompts
+     to stop and log the session
+
+Dashboard
+   * Line chart — minutes logged over time
+   * Pie chart — time broken down by topic
+   * Charts group sessions by topic automatically
+
+Atlas Notes
+   * [[Python - SQLite]]
+   * [[Python - matplotlib]]
+   * [[Python - tkinter]]
+   * [[Git]]
+
+Sessions
+   * 2026-05-30 — built tool end to end, set up GitHub
+     repo and live charts (Google Sheets version)
+   * 2026-06-04 — rebuilt with SQLite and matplotlib,
+     removed Google Sheets dependency
+   * 2026-06-05 — Git setup, branch cleanup, repo finalized
+
+Still To Do
+   * Log consistently every day
+   * Build landing page
+   * Set up Buy Me a Coffee
+   * Package as .exe with PyInstaller
+   * Revisit after one month to see if anything needs adding
+</pre>
+</div>

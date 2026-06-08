@@ -10,9 +10,10 @@ import matplotlib.dates as mdates  # For formatting dates on chart axes
 from datetime import datetime
 
 
+
 # --- Config ---
 # All data files live in the same folder as this script
-BASE_DIR = os.path.dirname(__file__)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Local SQLite database file — stores all session data
 DB_FILE = os.path.join(BASE_DIR, "sessions.db")
@@ -84,8 +85,12 @@ def load_state():
 def save_state(state):
     # Savves the current session info to a local file
     # This is how the script remembers a session between clicks
-    with open(STATE_FILE, "w") as f:
-        json.dump(state, f)
+    try:
+        with open(STATE_FILE, "w") as f:
+            json.dump(state, f)
+    except Exception as e:
+        import tkinter.messagebox as mb
+        mb.showerror("Save Error", f"Could not save state:\n{STATE_FILE}\n\n{e}")
 
 def clear_state():
     # Deletes the session file once a session has been logged
@@ -108,6 +113,8 @@ def save_categories(categories):
         json.dump({"categories": categories}, f)
 
 
+
+
 # SECTION 4: Settings menu and topic picker
 
 def settings_menu(root):
@@ -117,6 +124,10 @@ def settings_menu(root):
     win = tk.Toplevel(root)
     win.title("Settings - Manage Categories")
     win.geometry("400x500")
+    win.update_idletasks()
+    x = (win.winfo_screenwidth() // 2) - (win.winfo_width() // 2)
+    y = (win.winfo_screenheight() // 2) - (win.winfo_height() // 2)
+    win.geometry(f"+{x}+{y}")
     win.resizable(False, False)
 
     tk.Label(
@@ -204,6 +215,10 @@ def pick_topic(root):
     win = tk.Toplevel(root)
     win.title("What are you working on?")
     win.geometry("400x500")
+    win.update_idletasks()
+    x = (win.winfo_screenwidth() // 2) - (win.winfo_width() // 2)
+    y = (win.winfo_screenheight() // 2) - (win.winfo_height() // 2)
+    win.geometry(f"+{x}+{y}")
     win.resizable(False, False)
 
     tk.Label(
@@ -248,6 +263,7 @@ def pick_topic(root):
 
 
 # SECTION 5: Start session, stop session, and dashboard
+
 
 def start_session(root):
     # Opens the topic picker and saves the session start time
@@ -373,6 +389,10 @@ def main_menu(root):
     win = tk.Toplevel(root)
     win.title("Learning Tracker")
     win.geometry("300x250")
+    win.update_idletasks()
+    x = (win.winfo_screenwidth() // 2) - (win.winfo_width() // 2)
+    y = (win.winfo_screenheight() // 2) - (win.winfo_height() // 2)
+    win.geometry(f"+{x}+{y}")
     win.resizable(False, False)
 
     tk.Label(
@@ -415,6 +435,7 @@ def main():
     # Initialize the database on every launch
     # Safe to call repeatedly — won't overwrite existing data
     init_db()
+    
 
     root = tk.Tk()
     root.withdraw()  # Hide the main window — we only want popups
