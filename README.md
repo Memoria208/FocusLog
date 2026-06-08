@@ -1,30 +1,45 @@
-# Learning Tracker
+[![Typing SVG](https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1200&color=6B9FDD&width=500&lines=The+data+says+you're+doing+fine.;Productivity+tracking+for+people+who+know+better.;Hours+logged.+Sanity+optional.)](https://git.io/typing-svg)
 
-A lightweight personal desktop app for logging and visualizing work and learning sessions. Built with Python and tkinter — no server, no account, no internet required.
+# FocusLog
+
+A lightweight desktop app for logging and visualizing work sessions. No server, no account, no internet required — just a single click to start tracking and another to stop.
+
+![Python](https://img.shields.io/badge/Python_3-3776AB?style=flat-square&logo=python&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white)
+![tkinter](https://img.shields.io/badge/tkinter-GUI-4479A1?style=flat-square)
+![matplotlib](https://img.shields.io/badge/matplotlib-charts-11557c?style=flat-square)
+
+---
+
+## What it does
+
+Launch the app to start a session. Launch it again to stop. Everything in between gets logged — topic, duration, and optional notes — to a local SQLite database. A built-in dashboard shows your time broken down by topic and plotted over time.
+
+Designed for a single local user. All data stays on your machine.
 
 ---
 
 ## Features
 
-- **Start/stop sessions** with a single click from the desktop shortcut
-- **Topic picker** — choose from your saved categories or type a custom topic
-- **Optional session notes** — captured when you stop a session
-- **SQLite storage** — all sessions saved locally in `sessions.db`
-- **Dashboard** — two charts rendered with matplotlib:
+- Start/stop sessions with a single click from a desktop shortcut
+- Topic picker — choose from saved categories or type a custom one
+- Optional session notes captured on stop
+- SQLite storage — all sessions saved locally in `sessions.db`
+- Dashboard with two charts:
   - Line chart: minutes logged over time
   - Pie chart: time breakdown by topic
-- **Category management** — add, remove, or reset your topic categories via Settings
+- Category management — add, remove, or reset topics via Settings
 
 ---
 
-## Project Structure
+## Project structure
 
 ```
-time-tracker/
+focuslog/
 ├── tracker.py          # Main application
 ├── sessions.db         # SQLite database (auto-created on first run)
 ├── config.json         # Saved categories (auto-created on first run)
-├── session_state.json  # Temp file tracking an active session (deleted on stop)
+├── session_state.json  # Tracks an active session (deleted on stop)
 └── README.md
 ```
 
@@ -32,10 +47,10 @@ time-tracker/
 
 ## Requirements
 
-- Python 3.x (developed on Python 3.14)
-- `matplotlib` — install with:
+- Python 3.x
+- `matplotlib`
 
-```
+```bash
 pip install matplotlib
 ```
 
@@ -43,50 +58,47 @@ All other dependencies (`tkinter`, `sqlite3`, `json`, `os`, `datetime`) are part
 
 ---
 
-## Running the App
+## Run it
 
-### From the desktop shortcut
-
-The shortcut is configured to launch with `pythonw` (no console window) and the "Start in" field set to the project directory:
-
-- **Target:** `C:\Users\tamsl\AppData\Local\Programs\Python\Python314\pythonw.exe tracker.py`
-- **Start in:** `C:\Users\tamsl\dev\projects\time-tracker\`
-
-### From the terminal
-
-```
-cd C:\Users\tamsl\dev\projects\time-tracker
+```bash
+cd focuslog
 python tracker.py
 ```
 
----
-
-## How It Works
-
-1. **Launch the app.** If no session is active, the main menu appears.
-2. **Start a Session.** Pick a topic from your categories (or type a custom one). The start time is saved to `session_state.json`.
-3. **Launch the app again to stop.** The app detects the active session and asks if you want to stop and log it.
-4. **Add optional notes**, then confirm. The session is written to `sessions.db` and the state file is deleted.
-5. **View Dashboard** to see your progress charts.
-
-> The app uses a single-click launch model — each launch either starts or stops a session depending on whether one is already in progress.
+To run without a console window (Windows), use `pythonw` instead of `python`.
 
 ---
 
-## Data Storage
+## How it works
+
+1. Launch the app. If no session is active, the main menu appears.
+2. Pick a topic from your categories or type a custom one and start a session. The start time is saved to `session_state.json`.
+3. Launch the app again to stop. It detects the active session and prompts you to log it.
+4. Add optional notes and confirm. The session is written to `sessions.db` and the state file is deleted.
+5. Open the dashboard to see your progress charts.
+
+---
+
+## Data storage
 
 | File | Purpose |
-|---|---|
-| `sessions.db` | SQLite database; stores all completed sessions |
-| `config.json` | Stores your custom category list |
+|------|----------|
+| `sessions.db` | Stores all completed sessions |
+| `config.json` | Stores your category list |
 | `session_state.json` | Tracks an active session; deleted after logging |
 
 All files are stored in the project directory alongside `tracker.py`.
 
 ---
 
-## Known Limitations
+## Known limitations
 
-- **Hard power-offs cannot be intercepted.** If the machine loses power mid-session, the active session state will remain in `session_state.json` and prompt you on next launch.
-- The dashboard opens in a separate matplotlib window (not embedded in the app UI).
-- No multi-user support — designed for a single local user.
+- Hard power-offs cannot be intercepted. If the machine loses power mid-session, the active state remains in `session_state.json` and will prompt you on next launch.
+- The dashboard opens in a separate matplotlib window, not embedded in the app UI.
+- No multi-user support.
+
+---
+
+## Author
+
+Tammy — Computer Science, College of Western Idaho
